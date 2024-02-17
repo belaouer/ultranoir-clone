@@ -1,7 +1,19 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimate } from "framer-motion";
 
-const Loader = ({ setIsLoaded }) => {
+const Loader = ({ setIsLoaded }) => { <div className="z-20 mix-blend-difference">
+        <p className="relative text-3xl  tracking-wide  leading-none ">
+          ultranoir
+          <motion.span
+            ref={firstLine}
+            className="block absolute  h-[1px] bg-gray-500"
+          />
+          <motion.span
+            ref={secondLine}
+            className="block absolute  h-[1px] bg-white"
+          />
+        </p>
+      </div>
   const [scope, animate] = useAnimate();
 
   const firstLine = useRef(null);
@@ -58,19 +70,7 @@ const Loader = ({ setIsLoaded }) => {
       ref={scope}
       className="relative w-screen h-screen bg-black text-white flex justify-center items-center "
     >
-      <div className="z-20 mix-blend-difference">
-        <p className="relative text-3xl  tracking-wide  leading-none ">
-          ultranoir
-          <motion.span
-            ref={firstLine}
-            className="block absolute  h-[1px] bg-gray-500"
-          />
-          <motion.span
-            ref={secondLine}
-            className="block absolute  h-[1px] bg-white"
-          />
-        </p>
-      </div>
+     
       <motion.div
         ref={whiteCover}
         className="z-10 absolute bottom-0 left-0 w-full  bg-white"

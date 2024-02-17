@@ -6,14 +6,15 @@ import Cursor from "./components/Cursor";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(true);
+  const [cursorType, setCursorType] = useState("smallCursor");
   return (
-    <>
-      <Cursor />
+    <div>
+      <Cursor cursorType={cursorType} />
       <AnimatePresence>
         {/* {isLoaded ? <Loader setIsLoaded={setIsLoaded} /> : <Home />} */}
-        <Home />
+        <Home setCursorType={setCursorType} />
       </AnimatePresence>
-    </>
+    </div>
   );
 }
 
