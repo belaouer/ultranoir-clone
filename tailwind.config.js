@@ -5,6 +5,7 @@ export default {
     extend: {},
     fontFamily: {
       spectral: ["Spectral", "sans-serif"],
+      figtrees: ["Figtree", "sans-serif"],
     },
   },
   plugins: [],

@@ -1,44 +1,45 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { motion } from "framer-motion";
-const Title = ({ text, bold = false, custom }) => {
-  const container = useRef(null);
+import React, { useEffect } from "react";
+import { motion, stagger, useAnimate } from "framer-motion";
+
+const Title = ({ title, custom }) => {
+  const [scope, animate] = useAnimate();
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      const t1 = gsap.timeline();
-      t1.to("#word", { opacity: 1, delay: 0.2 * custom }).from("#lettre", {
-        y: "150%",
-        duration: 0.6,
-        ease: "power1.out",
-        stagger: {
-          each: 0.02,
-          from: "center",
-        },
-      });
-    }, container);
-    return () => ctx.revert();
+    const startAnimation = async () => {
+      await animate("#title", { delay: 0.8 * custom });
+      await animate(
+        "#lettre",
+        { y: 0 },
+        {
+          duration: 0.6,
+          delay: stagger(0.02, { from: "center" }),
+          ease: "easeOut",
+          onUpdate: (latest) => {
+            if (latest === 1) animate.p;
+          },
+        }
+      );
+    };
+    startAnimation();
   }, []);
   return (
-    <motion.div id="text" ref={container}>
-      {text.split(" ").map((word, i) => {
-        return (
-          <span
-            id="word"
-            key={i}
-            className={`inline-block mr-2 text-[1.6em] font-spectral italic leading-[1] overflow-hidden ${
-              bold ? "font-semibold" : "font-normal"
-            }`}
-          >
-            {word.split("").map((lettre, i) => {
-              return (
-                <span id="lettre" className="inline-block" key={i}>
-                  {lettre}
-                </span>
-              );
-            })}
-          </span>
-        );
-      })}
+    <motion.div
+      ref={scope}
+      className="text-[1.6em] italic font-spectral font-semibold  leading-[1.3] text-white"
+    >
+      <motion.h1 id="title" className="overflow-hidden">
+        {title.split("").map((lettre, i) => {
+          return (
+            <motion.span
+              style={{ y: "300%" }}
+              id="lettre"
+              key={i}
+              className="inline-block"
+            >
+              {lettre === " " ? "\u00A0" : lettre}
+            </motion.span>
+          );
+        })}
+      </motion.h1>
     </motion.div>
   );
 };

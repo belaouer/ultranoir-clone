@@ -9,10 +9,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: none;
 }
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: "Figtree", sans-serif;
+  background-color: black;
+  cursor: none;
+}
+
+.navlink {
+  -webkit-text-stroke-color: rgb(105, 100, 100);
+  -webkit-text-stroke-width: 2px;
+}
+.container:hover {
+  -webkit-text-stroke-color: white;
 }
